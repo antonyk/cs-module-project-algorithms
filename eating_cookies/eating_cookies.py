@@ -3,30 +3,34 @@ Input: an integer
 Returns: an integer
 '''
 
-def eating_cookies(n):
-    # Runtime: O(3^n)
-    if n < 0:
-        return 0
-    if n == 0:
-        return 1
-    else:
-        return eating_cookies(n - 1) + eating_cookies(n - 2) + eating_cookies(n - 3)
-
-# def eating_cookies(n, cache):
-#     # use dictionary as cache
-#     # key is n, value is the accumulated number
+# def eating_cookies(n):
+#     # Runtime: O(3^n)
 #     if n < 0:
 #         return 0
 #     if n == 0:
 #         return 1
-
-#     # check if answer is in the cache
-#     if cache[n] > 0:
-#         return cache[n]
 #     else:
-#         # perform recursive logic and save the answer in the cache
-#         cache[n] = eating_cookies(n-1, cache) + eating_cookies(n-2, cache) + eating_cookies(n-3, cache)
-#         return cache[n]
+#         return eating_cookies(n - 1) + eating_cookies(n - 2) + eating_cookies(n - 3)
+
+
+def eating_cookies(n, cache=None):
+    if cache == None:
+        cache = {i: 0 for i in range(n + 1)}
+
+    # use dictionary as cache
+    # key is n, value is the accumulated number
+    if n < 0:
+        return 0
+    if n == 0:
+        return 1
+
+    # check if answer is in the cache
+    if cache[n] > 0:
+        return cache[n]
+    else:
+        # perform recursive logic and save the answer in the cache
+        cache[n] = eating_cookies(n-1, cache) + eating_cookies(n-2, cache) + eating_cookies(n-3, cache)
+        return cache[n]
 
 
 
@@ -34,7 +38,6 @@ if __name__ == "__main__":
     # Use the main function here to test out your implementation
     num_cookies = 10
     # cache = dict()
-    cache = {i: 0 for i in range(num_cookies + 1)}
 
     print(f"There are {eating_cookies(num_cookies)} ways for Cookie Monster to eat {num_cookies} cookies")
 
