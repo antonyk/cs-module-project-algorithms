@@ -3,10 +3,23 @@ Input: a List of integers
 Returns: a List of integers
 '''
 def product_of_all_other_numbers(arr):
-    # Your code here
+    mix = [1] * len(arr)
 
-    pass
+    # O(n^2) time, O(1) space, no division
+    for i in range(len(arr)):
+        for j in range(len(arr)):
+            if i != j:
+                mix[i] = mix[i] * arr[j]
 
+
+    # O(n) time, O(1) space, uses division
+    # total = 1
+    # for i in range(len(arr)):
+    #     total *= arr[i]
+    # for i in range(len(arr)):
+    #     mix[i] = total / arr[i]
+
+    return mix
 
 if __name__ == '__main__':
     # Use the main function to test your implementation
